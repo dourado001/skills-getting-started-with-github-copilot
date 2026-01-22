@@ -1,3 +1,14 @@
+/* Botão de exclusão de participante */
+.delete-participant-btn {
+  color: #c62828;
+  font-size: 1.1em;
+  transition: color 0.2s;
+}
+.delete-participant-btn:hover {
+  color: #fff;
+  background: #c62828;
+  border-radius: 50%;
+}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -141,4 +152,32 @@ footer {
   margin-top: 30px;
   padding: 20px;
   color: #666;
+}
+
+.participants-section {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #eef3fb;
+  border-radius: 4px;
+  border: 1px solid #c5cae9;
+}
+
+.participants-section strong {
+  color: #3949ab;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.participants-list {
+  list-style-type: disc;
+  margin-left: 20px;
+  margin-bottom: 0;
+  color: #333;
+  font-size: 15px;
+}
+
+.no-participants {
+  color: #888;
+  font-style: italic;
+  margin: 0;
 }
