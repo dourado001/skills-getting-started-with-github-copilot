@@ -1,3 +1,14 @@
+/* Botão de exclusão de participante */
+.delete-participant-btn {
+  color: #c62828;
+  font-size: 1.1em;
+  transition: color 0.2s;
+}
+.delete-participant-btn:hover {
+  color: #fff;
+  background: #c62828;
+  border-radius: 50%;
+}
 * {
   box-sizing: border-box;
   margin: 0;

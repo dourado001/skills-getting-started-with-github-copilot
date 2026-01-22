@@ -27,8 +27,17 @@ document.addEventListener("DOMContentLoaded", () => {
           participantsHTML = `
             <div class="participants-section">
               <strong>Participants:</strong>
-              <ul class="participants-list">
-                ${details.participants.map((email) => `<li>${email}</li>`).join("")}
+              <ul class="participants-list" style="list-style-type: none; padding-left: 0;">
+                ${details.participants
+                  .map(
+                    (email) => `
+                  <li style="display: flex; align-items: center;">
+                    <span>${email}</span>
+                    <button class="delete-participant-btn" title="Remover participante" data-activity="${name}" data-email="${email}" style="margin-left: 8px; background: none; border: none; cursor: pointer;">🗑️</button>
+                  </li>
+                `,
+                  )
+                  .join("")}
               </ul>
             </div>
           `;
@@ -56,6 +65,32 @@ document.addEventListener("DOMContentLoaded", () => {
         option.value = name;
         option.textContent = name;
         activitySelect.appendChild(option);
+      });
+
+      // Adiciona listeners para os botões de exclusão
+      document.querySelectorAll(".delete-participant-btn").forEach((btn) => {
+        btn.addEventListener("click", async (e) => {
+          const activity = btn.getAttribute("data-activity");
+          const email = btn.getAttribute("data-email");
+          if (confirm(`Remover ${email} de ${activity}?`)) {
+            try {
+              const response = await fetch(
+                `/activities/${encodeURIComponent(activity)}/unregister?email=${encodeURIComponent(email)}`,
+                {
+                  method: "POST",
+                },
+              );
+              const result = await response.json();
+              if (response.ok) {
+                fetchActivities();
+              } else {
+                alert(result.detail || "Erro ao remover participante.");
+              }
+            } catch (error) {
+              alert("Erro ao remover participante.");
+            }
+          }
+        });
       });
     } catch (error) {
       activitiesList.innerHTML =
